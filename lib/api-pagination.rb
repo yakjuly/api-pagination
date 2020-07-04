@@ -44,6 +44,14 @@ module ApiPagination
       end
     end
 
+    def total_pages_from(collection)
+      case ApiPagination.config.paginator
+      when :pagy          then collection.total_pages.to_s
+      when :kaminari      then collection.total_pages.to_s
+      when :will_paginate then collection.total_pages.to_s
+      end
+    end
+
     private
 
     def paginate_with_pagy(collection, options)
